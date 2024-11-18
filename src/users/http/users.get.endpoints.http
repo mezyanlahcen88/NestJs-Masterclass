@@ -1,0 +1,4 @@
+## get all users 
+GET http://localhost:3000/users/1552
+?limit=fffff
+&page=2

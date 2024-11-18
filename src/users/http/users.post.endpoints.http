@@ -1,0 +1,12 @@
+## all post endpoitn will be here
+
+POST http://localhost:3000/users
+Content-Type:application/json
+
+{
+    "firstName" : "Hassan",
+    "lastName" : "Mzn",
+    "phone" : "0564545",
+    "email":"hhasn@gmail.com",
+    "password":"Affff123#"
+}
