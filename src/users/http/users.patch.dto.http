@@ -1,0 +1,13 @@
+## all patches goes here
+PATCH  http://localhost:3000/users
+
+
+{
+    "firstName" : "Hassan",
+    "lastName" : "Mzn",
+    "phone" : "0564545",
+    "email":"hhasnmail.com",
+    "password":"Appdhh8#",
+    "isAuth":true
+
+}
