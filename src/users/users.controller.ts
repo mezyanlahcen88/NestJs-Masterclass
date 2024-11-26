@@ -7,7 +7,7 @@ import {
   Patch,
   Query,
   DefaultValuePipe,
-  ParseIntPipe
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamsDto } from './dtos/get-users-params.dto';
@@ -15,23 +15,20 @@ import { PatchUsersDto } from './dtos/patch-users.dto';
 import { UsersService } from './providers/users.service';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-
 @Controller('users')
 @ApiTags('Users Api')
 export class UsersController {
-  constructor(private readonly usersService :UsersService){
-
-  }
+  constructor(private readonly usersService: UsersService) {}
   @Get('/:id?')
   @ApiOperation({
-    summary: 'Fetches a list of registered users on the application.'
+    summary: 'Fetches a list of registered users on the application.',
   })
   @ApiQuery({
     name: 'limit',
     type: String,
     description: 'The upper limit of pages you want the pagination to return',
     required: false,
-    example :10
+    example: 10,
   })
   @ApiQuery({
     name: 'page',
@@ -39,8 +36,7 @@ export class UsersController {
     description:
       'The position of the page number that you want the API to return',
     required: false,
-    example :1
-
+    example: 1,
   })
   @ApiResponse({
     status: 200,
