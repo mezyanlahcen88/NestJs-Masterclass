@@ -1,3 +1,1 @@
-## get all gets from posts
-
-GET http://localhost:3000/posts/123
+GET  http://localhost:3000/posts/1234

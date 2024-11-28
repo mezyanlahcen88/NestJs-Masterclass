@@ -1,24 +1,46 @@
-import { Injectable } from "@nestjs/common";
-import { GetUsersParamsDto } from "../dtos/get-users-params.dto";
-import { AuthService } from "src/auth/auth.service";
+import { AuthService } from 'src/auth/providers/auth.service';
+import { GetUsersParamDto } from '../dtos/get-users-param.dto';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
 
 @Injectable()
-export class UsersService{
-  constructor(private readonly authService : AuthService){}
+export class UsersService {
+  constructor(
+    // Injecting Auth Service
+    @Inject(forwardRef(() => AuthService))
+    private readonly authService: AuthService,
+  ) {}
 
+  /*
+   * Method to find all the users
+   */
+  public findAll(
+    getUserParamDto: GetUsersParamDto,
+    limt: number,
+    page: number,
+  ) {
+    const isAuth = this.authService.isAuth();
+    console.log(isAuth);
 
-      public findAll(getUsersParamDTO: GetUsersParamsDto, limit?: number, page?: number) {
-        return [
-          { firstName: 'John', email: 'john@example.com' },
-          { firstName: 'Alice', email: 'alice@example.com' },
-        ];
-      }
+    return [
+      {
+        firstName: 'John',
+        email: 'john@doe.com',
+      },
+      {
+        firstName: 'Alice',
+        email: 'alice@doe.com',
+      },
+    ];
+  }
 
-      public findOneById(id: number) {
-        return {
-          id :400,
-          firstName: 'John',
-          email: 'john@example.com',
-        };
-      }
+  /*
+   * Find a user by ID
+   */
+  public findOneById(id: string) {
+    return {
+      id: 1234,
+      firstName: 'Alice',
+      email: 'alice@doe.com',
+    };
+  }
 }

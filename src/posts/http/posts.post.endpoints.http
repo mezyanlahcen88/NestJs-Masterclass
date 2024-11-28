@@ -1,3 +1,4 @@
+# {\r\n    \"@context\": \"https:\/\/schema.org\",\r\n    \"@type\": \"Person\"\r\n  }
 POST http://localhost:3000/posts
 Content-Type: application/json
 
