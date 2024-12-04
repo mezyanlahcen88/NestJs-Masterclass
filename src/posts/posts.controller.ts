@@ -42,6 +42,6 @@ export class PostsController {
   })
   @Patch()
   public updatePost(@Body() patchPostDto : PatchPostDto){
-      console.log(patchPostDto);
+      console.log(patchPostDto instanceof PatchPostDto);
   }
 }

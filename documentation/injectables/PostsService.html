@@ -144,6 +144,11 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#createPost" >createPost</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#findAll" >findAll</a>
                             </li>
                         </ul>
@@ -164,12 +169,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(usersService: <a href="../injectables/UsersService.html" target="_self">UsersService</a>)</code>
+<code>constructor(usersService: <a href="../injectables/UsersService.html" target="_self">UsersService</a>, postRepository: <a href="../entitys/Post.html" target="_self">Repository&lt;Post&gt;</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/posts/providers/posts.service.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/posts/providers/posts.service.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -198,6 +203,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>postRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Post.html" target="_self" >Repository&lt;Post&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -212,6 +229,76 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createPost"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>createPost</b></span>
+                        <a href="#createPost"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createPost(createCatDto: <a href="../classes/CreateCatDto.html" target="_self">CreateCatDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/posts/providers/posts.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>createCatDto</td>
+                                            <td>
+                                                            <code><a href="../classes/CreateCatDto.html" target="_self" >CreateCatDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -234,8 +321,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="13"
-                                    class="link-to-prism">src/posts/providers/posts.service.ts:13</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="22"
+                                    class="link-to-prism">src/posts/providers/posts.service.ts:22</a></div>
                         </td>
                     </tr>
 
@@ -289,6 +376,10 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
 import { UsersService } from &#x27;src/users/providers/users.service&#x27;;
+import { CreateCatDto } from &#x27;../../cats/dto/create-cat.dto&#x27;;
+import { Repository } from &#x27;typeorm&#x27;;
+import { Post } from &#x27;../post.entity&#x27;;
+import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 
 @Injectable()
 export class PostsService {
@@ -297,6 +388,11 @@ export class PostsService {
      * Injecting Users Service
      */
     private readonly usersService: UsersService,
+    /**
+     * inject postRepository
+     */
+    @InjectRepository(Post)
+    private postRepository :Repository&lt;Post&gt;
   ) {}
 
   public findAll(userId: string) {
@@ -314,6 +410,12 @@ export class PostsService {
         content: &#x27;Test Content 2&#x27;,
       },
     ];
+  }
+
+  public async createPost(createCatDto :CreateCatDto){
+    let newPost &#x3D; this.postRepository.create(createCatDto);
+    newPost &#x3D; await this.postRepository.save(newPost);
+    return newPost;
   }
 }
 </code></pre>

@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/providers/users.service';
+import { CreateCatDto } from '../../cats/dto/create-cat.dto';
+import { Repository } from 'typeorm';
+import { Post } from '../post.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class PostsService {
@@ -8,6 +12,11 @@ export class PostsService {
      * Injecting Users Service
      */
     private readonly usersService: UsersService,
+    /**
+     * inject postRepository
+     */
+    @InjectRepository(Post)
+    private postRepository :Repository<Post>
   ) {}
 
   public findAll(userId: string) {
@@ -25,5 +34,11 @@ export class PostsService {
         content: 'Test Content 2',
       },
     ];
+  }
+
+  public async createPost(createCatDto :CreateCatDto){
+    let newPost = this.postRepository.create(createCatDto);
+    newPost = await this.postRepository.save(newPost);
+    return newPost;
   }
 }

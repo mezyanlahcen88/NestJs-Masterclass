@@ -6,6 +6,9 @@ import { CatsModule } from './cats/cats.module';
 import { PostsModule } from './posts/posts.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './users/user.entity';
+import { Post } from './posts/post.entity';
+import { TagModule } from './tag/tag.module';
 
 
 
@@ -19,12 +22,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         username: 'postgres',
         password: 'admin',
         database: 'nestjs-blog',
-        entities: [],
+        entities: [User,Post],
         synchronize: true, // Disable in production
       }),
       imports: [], // Future imports like ConfigModule will go here
       inject: [],  // Future injections like ConfigService will go here
     }),
+    TagModule,
   ],
   controllers: [AppController],
   providers: [AppService],
