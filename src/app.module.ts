@@ -9,11 +9,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
 import { Post } from './posts/post.entity';
 import { TagModule } from './tag/tag.module';
+import { MetaOptionModule } from './meta-option/meta-option.module';
 
 
 
 @Module({
-  imports: [UsersModule, CatsModule, PostsModule, AuthModule,
+  imports: [
     TypeOrmModule.forRootAsync({
       useFactory: async () => ({
         type: 'postgres',
@@ -28,7 +29,7 @@ import { TagModule } from './tag/tag.module';
       imports: [], // Future imports like ConfigModule will go here
       inject: [],  // Future injections like ConfigService will go here
     }),
-    TagModule,
+    UsersModule, CatsModule, PostsModule, AuthModule,TagModule, MetaOptionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
