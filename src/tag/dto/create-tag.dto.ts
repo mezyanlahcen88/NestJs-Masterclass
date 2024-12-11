@@ -18,6 +18,8 @@ export class CreateTagDto {
   @Length(3,255)
   @IsString()
   name: string;
+
+
   @ApiProperty({
     description: "For example 'my-url'",
     required:true,
@@ -45,6 +47,7 @@ export class CreateTagDto {
   })
   @IsString()
   schema?: string;
+  
   @ApiPropertyOptional({
     description:'this is featuredImageUrl',
     required :false,

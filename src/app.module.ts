@@ -23,7 +23,8 @@ import { MetaOptionModule } from './meta-option/meta-option.module';
         username: 'postgres',
         password: 'admin',
         database: 'nestjs-blog',
-        entities: [User,Post],
+        // entities: [User,Post],
+        autoLoadEntities: true,
         synchronize: true, // Disable in production
       }),
       imports: [], // Future imports like ConfigModule will go here
